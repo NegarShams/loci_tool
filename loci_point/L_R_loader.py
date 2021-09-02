@@ -136,6 +136,9 @@ def loader(scenario_list,project):
         temp_filtered = filter(lambda char_subfolders: char_subfolders.loc_name == 'BL England 400MW',
                                char_subfolders)
 
+        # temp_filtered = filter(lambda char_subfolders: char_subfolders.loc_name == 'BL England 400MW_PreFilter',
+        #                        char_subfolders)
+
         scen_folder = list(temp_filtered)
         scen_temp = scen_folder[0]
         scen_subfolders = scen_temp.GetContents('*.')
@@ -156,6 +159,11 @@ def loader(scenario_list,project):
         if scenario_name.endswith('_I'):
             L[0].vector=L_I
             R[0].vector=R_I
+
+        if scenario_name.endswith('_A'):
+            L[0].vector=L_I
+            R[0].vector=R_I
+
         k=1
 
 
@@ -177,8 +185,16 @@ if __name__ == '__main__':
     #Project_name = '20210225-OCW01-New_VImp_Main_BLE_test1'
     #Project_name = 'New_OC_BLE_Filter1_test1'
     #Project_name ='New_OC_BLE_Filter2_withHigh_loci'
-    Project_name ='New_OC_BLE_Filter4'
-    Project_name = 'New_OC_BLE_IEC_1'
+    # Project_name ='New_OC_BLE_Filter4'
+    # Project_name = 'New_OC_BLE_IEC_1'
+    # Project_name='OC_BLE_Injection_New_1'
+    # Project_name = 'OC_BLE_Injection_New_4'
+    # Project_name = 'OC_BLE_Injection_New_5'
+    Project_name = 'OC_BLE_Injection_New_Main_New_4'
+
+    # Amp_F_loader=True # if True it means that it's going to load the impedance values
+    # # of AmPF scenarios which might be calculated using a different h values in point finder code
+    # # if false it's going to load normal V and I scenario values.
 
 
     FILE_PTH_INPUT_1 = common.get_local_file_path_withfolder(file_name=FILE_NAME_INPUT_1, folder_name='dig_results')
@@ -187,7 +203,8 @@ if __name__ == '__main__':
     output_excel_dig_list = ['{}_{}'.format(x, 'points.xlsx') for x in scenario_dig_list]
     scenario_dig_list_V = ['{}_{}'.format(x, 'V') for x in scenario_dig_list]
     scenario_dig_list_I = ['{}_{}'.format(x, 'I') for x in scenario_dig_list]
-    dig_scenarios=scenario_dig_list_V + scenario_dig_list_I
+    scenario_dig_list_A = ['{}_{}'.format(x, 'A') for x in scenario_dig_list]
+    dig_scenarios=scenario_dig_list_V + scenario_dig_list_I + scenario_dig_list_A
 
     pf_version = '2020'
 

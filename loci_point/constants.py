@@ -35,12 +35,21 @@ class plotting:
 	save_plot=False
 	show_plot=False
 	folder='plots'
+	TOV_plots_folder='TOV_Fig'
+	ZMP_plots_folder = 'ZMP_Fig'
+	ZMP_plots_folder = 'ZMP_Fig_New'
 	string_added='fig_'
 	figure_type='.png'
+	TOV_legend=['Phase A','Phase B','Phase C','TOV Limit']
+	ZMP_legend = ['Phase A', 'Phase B', 'Phase C']
 
 
 class folder_file_names:
 	dig_result_folder = 'dig_results'
+	TOV_folder='TOV_results'
+	ZMP_folder = 'ZMP_results'
+	#TOV_folder = 'TOV_results'
+	POW_folder = 'POW_results'
 
 class Digsilent:
 
@@ -53,6 +62,29 @@ class Digsilent:
 	number_or_name_toggle=True  # if false it means that it uses parameter name list to find the columns from
 	# digsilent results, if True it uses number of columns
 	header_list = ['H', 'R', 'X']
+	TOV_header_list = ['Time', 'Phase A', 'Phase B','Phase C']
+	TOV_header_list_no_fc = ['Phase A', 'Phase B', 'Phase C']
+
+	ZMP_header_list = ['Time', 'Phase A-bus(j)', 'Phase B-bus(j)', 'Phase C-bus(j)','Phase A-bus(i)', 'Phase B-bus(i)', 'Phase C-bus(i)']
+	ZMP_header_list_no_fc = ['Phase A-bus(j)', 'Phase B-bus(j)', 'Phase C-bus(j)','Phase A-bus(i)', 'Phase B-bus(i)', 'Phase C-bus(i)']
+
+
+	ZMP_header_list_New = ['Time', 'Phase A', 'Phase B','Phase C']
+	ZMP_header_list_no_New_fc = ['Phase A', 'Phase B', 'Phase C']
+
+	# ZMP_header_list = ['Time', 'Cable1_Phase A-bus(j)', 'Cable1_Phase B-bus(j)', 'Cable1_Phase C-bus(j)', 'Cable1_Phase A-bus(i)', 'Cable1_Phase B-bus(i)',
+	# 				   'Cable1_Phase C-bus(i)',\
+	# 				   'Cable2_Phase A-bus(j)', 'Cable2_Phase B-bus(j)', 'Cable2_Phase C-bus(j)',
+	# 				   'Cable2_Phase A-bus(i)', 'Cable2_Phase B-bus(i)',
+	# 				   'Cable2_Phase C-bus(i)'
+	# 				   ]
+	# ZMP_header_list_no_fc = ['Cable1_Phase A-bus(j)', 'Cable1_Phase B-bus(j)', 'Cable1_Phase C-bus(j)',
+	# 				   'Cable1_Phase A-bus(i)', 'Cable1_Phase B-bus(i)',\
+	# 				   'Cable1_Phase C-bus(i)' \
+	# 				   'Cable2_Phase A-bus(j)', 'Cable2_Phase B-bus(j)', 'Cable2_Phase C-bus(j)',\
+	# 				   'Cable2_Phase A-bus(i)', 'Cable2_Phase B-bus(i)',\
+	# 				   'Cable2_Phase C-bus(i)'
+	# 				   ]
 
 class General:
 	"""

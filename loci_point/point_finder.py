@@ -85,6 +85,8 @@ def worst_point(loci, R, X):
     loci['Z'] = np.nan
     loci['V factor'] = np.nan
     loci['I factor'] = np.nan
+    loci['Amp factor'] = np.nan
+    Z_P=math.sqrt((R) ** 2 + (X) ** 2)
 
     k=1
 
@@ -96,6 +98,8 @@ def worst_point(loci, R, X):
         loci.loc[i, 'Z'] = math.sqrt((loci.loc[i, 'R'] ** 2) + (loci.loc[i, 'X'] ** 2))
         loci.loc[i, 'I factor'] = math.sqrt(((loci.loc[i, 'R'] - R_N) ** 2) + ((loci.loc[i, 'X'] - X_N) ** 2))
         loci.loc[i, 'V factor'] = loci.loc[i, 'Z'] / loci.loc[i, 'I factor']
+        loci.loc[i, 'Amp factor'] = Z_P/ loci.loc[i, 'I factor']
+        max_row_amp_factor = loci['Amp factor'].argmax()
         max_row = loci['V factor'].argmax()
         min_row = loci['I factor'].argmin()
 
@@ -103,6 +107,9 @@ def worst_point(loci, R, X):
     X_worst_V = loci.loc[max_row, 'X']
     R_worst_I = loci.loc[min_row, 'R']
     X_worst_I = loci.loc[min_row, 'X']
+
+    R_worst_amp_fac = loci.loc[max_row_amp_factor, 'R']
+    X_worst_amp_fac = loci.loc[max_row_amp_factor, 'X']
 
 
     return R_worst_V, X_worst_V, R_worst_I, X_worst_I
@@ -198,6 +205,11 @@ def finder_csv(loci_excel, csv_name, h_excel, added_point, output_excel,output_f
                                 object_name=constants.Digsilent.object_name, param_name_list=constants.Digsilent.param_name_list,
                                 header_list=constants.Digsilent.header_list,number_or_name=constants.Digsilent.number_or_name_toggle,
                                 param_number_list=constants.Digsilent.param_number_list)
+
+    decimals = pd.Series([1], index=['H'])
+    scan_df=scan_df.round(decimals)
+
+    #idx = (scan_df['H'].isin(h_df['H'].tolist()))
 
     # csv_name, csv_folder_name, object_name, param_name_list, header_list
 
@@ -314,11 +326,12 @@ def CSV_reader_df_maker(csv_name,csv_folder_name,object_name,param_name_list,hea
 
 if __name__ == '__main__':
 
-   #FILE_NAME_INPUT_1 = 'loci.xlsx'
+    #FILE_NAME_INPUT_1 = 'loci.xlsx'
     FILE_NAME_INPUT_1 = 'loci_BLE.xlsx'
     #FILE_NAME_INPUT_2 = 'intact_scan.xlsx'
-    FILE_NAME_INPUT_3 = 'h.xlsx'
-    FILE_NAME_INPUT_3 = 'h_new.xlsx'
+    #FILE_NAME_INPUT_3 = 'h.xlsx'
+    #FILE_NAME_INPUT_3 = 'h_new.xlsx'
+    FILE_NAME_INPUT_3 = 'h_all_f.xlsx'
 
     FILE_NAME_INPUT_4 = 'scenario_names.xlsx'
     #FILE_NAME_INPUT_6 = 'scenario_names_dig.xlsx'
